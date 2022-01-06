@@ -60,11 +60,11 @@ public class Factory : MonoBehaviour
         newGameObject.transform.localScale = Vector2.one * gridService.unitScale;
 
         Snake snakeScript = newGameObject.GetComponent<Snake>();
-        snakeScript.Construct(gridService, numberOfRowsAndColumns / 2, numberOfRowsAndColumns / 2, newGameObject.GetComponent<ArrowDirection>());
+        snakeScript.Construct(gridService, (int)(numberOfRowsAndColumns / 2f), (int)(numberOfRowsAndColumns / 2f), newGameObject.GetComponent<ArrowDirection>(), this);
         return snakeScript;
     }
 
-    public Food CreateFood(int row, int column, GridService gridService)
+    public Food CreateFood(int row, int column, GridService gridService, Snake snake, FoodManager foodManager)
     {
         GameObject newGameObject = Instantiate(Food);
         newGameObject.transform.SetParent(Parent);
@@ -72,7 +72,7 @@ public class Factory : MonoBehaviour
         newGameObject.transform.localPosition = gridService.GetPosition(column, row);
 
         Food foodScript = newGameObject.GetComponent<Food>();
-        foodScript.Construct(row, column);
+        foodScript.Construct(row, column, snake, foodManager);
         return foodScript;
     }
 
@@ -85,6 +85,18 @@ public class Factory : MonoBehaviour
         FoodManager foodManagerScript = newGameObject.GetComponent<FoodManager>();
         foodManagerScript.Construct(gridService, snake, this); // this = Factory, because we are inside the Factory class
         return foodManagerScript;
+    }
+
+    public TailPiece CreateTailPiece(int row, int column, float unitScale) 
+    {
+        GameObject newGameObject = Instantiate(TailPiece);
+        newGameObject.transform.SetParent(Parent);
+        newGameObject.transform.localScale = Vector2.one * unitScale;
+
+        TailPiece tailPieceScript = newGameObject.GetComponent<TailPiece>();
+        tailPieceScript.Construct(row, column);
+        return tailPieceScript;
+
     }
 
 }

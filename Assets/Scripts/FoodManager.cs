@@ -19,12 +19,15 @@ public class FoodManager : MonoBehaviour
         int row = 0;
         int column = 0;
 
-        // Snake.NumberOfPieces
-        // GridService.NumberOfRowsAndColumns
-        int randomInt = Random.Range(0, GridService.numberOfRowsAndColumns - Snake.NumberOfPieces);
+        List<(int Row, int Column)> unoccupiedPositions = Snake.GetSnakeUnoccupiedPositions();
+
+        int randomIndex = Random.Range(0, unoccupiedPositions.Count - 1);
+
+        row = unoccupiedPositions[randomIndex].Row;
+        column = unoccupiedPositions[randomIndex].Column;
 
 
-        Food food = Factory.CreateFood(row, column, GridService);
+        Food food = Factory.CreateFood(row, column, GridService, Snake, this);
             
     }
 

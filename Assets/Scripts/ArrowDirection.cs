@@ -4,26 +4,8 @@ using UnityEngine;
 
 public class ArrowDirection : MonoBehaviour, IDirectionInput
 { 
+    [field: SerializeField]
     private Direction Direction { get; set; }
-    //private static KeyCode GetUp()
-    //{
-    //    return KeyCode.UpArrow;
-    //}
-
-    //private static KeyCode GetDown()
-    //{
-    //    return KeyCode.DownArrow;
-    //}
-
-    //private static KeyCode GetLeft()
-    //{
-    //    return KeyCode.LeftArrow;
-    //}
-
-    //private static KeyCode GetRight()
-    //{
-    //    return KeyCode.RightArrow;
-    //}
 
     public KeyCode RightKey { get; } = KeyCode.RightArrow;
     public KeyCode LeftKey { get; } = KeyCode.LeftArrow;

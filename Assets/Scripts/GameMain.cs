@@ -24,6 +24,8 @@ public class GameMain : MonoBehaviour
         Snake snake = Factory.CreateSnake(gridService, numberOfRowsAndColumns);
 
         FoodManager foodManager = Factory.CreateFoodManager(gridService, snake);
+
+        foodManager.SpawnFood();
         
 
 
